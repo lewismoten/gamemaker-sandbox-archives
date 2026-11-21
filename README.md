@@ -1,3 +1,5 @@
+<p align="center"><img src="https://raw.githubusercontent.com/lewismoten/gamemaker-sandbox-archives/main/.github/social-preview.jpg" alt="Game-Maker Sandbox Archives: scan, unpack and discover games in ZIP, EXE and GMPAK files" width="640" height="320"></p>
+
 # @lewismoten/gamemaker-sandbox-archives
 
 [![npm](https://img.shields.io/npm/v/@lewismoten/gamemaker-sandbox-archives?label=npm)](https://www.npmjs.com/package/@lewismoten/gamemaker-sandbox-archives) [![GitHub release](https://img.shields.io/github/v/release/lewismoten/gamemaker-sandbox-archives?label=release)](https://github.com/lewismoten/gamemaker-sandbox-archives/releases/latest)
