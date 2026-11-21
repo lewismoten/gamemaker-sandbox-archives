@@ -1,6 +1,6 @@
 # Changelog
 
-Changes to `@lewismoten/gamemaker-sandbox-archives`, released as `v*` tags here and `archives-v*` tags in the monorepo. The format follows
+Changes to `@lewismoten/gamemaker-sandbox-archives`, released as `archives-v*` tags. The format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
@@ -44,7 +44,7 @@ code. Imports check what FLI, GIF and VOC files really hold and keep the player'
 
 Full list: [changes/release/archives/3.2.0.md](https://github.com/lewismoten/GameMaker-SandboxEdition/blob/archives-v3.2.0/changes/release/archives/3.2.0.md)
 
-[Unreleased]: https://github.com/lewismoten/gamemaker-sandbox-archives/compare/b7ef453d8fbb7e2d14fa752de2b11968c1705f27...main
+[Unreleased]: https://github.com/lewismoten/GameMaker-SandboxEdition/compare/archives-v3.2.3...HEAD
 [3.2.3]: https://github.com/lewismoten/GameMaker-SandboxEdition/compare/archives-v3.2.2...archives-v3.2.3
 [3.2.2]: https://github.com/lewismoten/GameMaker-SandboxEdition/compare/archives-v3.2.1...archives-v3.2.2
 [3.2.1]: https://github.com/lewismoten/GameMaker-SandboxEdition/compare/archives-v3.2.0...archives-v3.2.1
