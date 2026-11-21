@@ -1,10 +1,14 @@
 # @lewismoten/gamemaker-sandbox-archives
 
-Version **3.2.3**. Discover and unpack Game-Maker games in modern browsers or Node.js
+[![npm](https://img.shields.io/npm/v/@lewismoten/gamemaker-sandbox-archives?label=npm)](https://www.npmjs.com/package/@lewismoten/gamemaker-sandbox-archives) [![GitHub release](https://img.shields.io/github/v/release/lewismoten/gamemaker-sandbox-archives?label=release)](https://github.com/lewismoten/gamemaker-sandbox-archives/releases/latest)
+
+Discover and unpack Game-Maker games in modern browsers or Node.js
 **22.12+**, using ES modules with TypeScript declarations. The only runtime npm dependency
-is `@lewismoten/gamemaker-sandbox-engine` **^3.2.0**. Compressed inputs use
+is `@lewismoten/gamemaker-sandbox-engine` (supported range in `package.json`). Compressed inputs use
 `DecompressionStream` (including `deflate-raw` for ZIP and `gzip` for compressed packs);
 ZIP writing uses `CompressionStream` when available and otherwise stores bytes.
+
+From npmjs (no token needed): `npm install @lewismoten/gamemaker-sandbox-archives`. From GitHub Packages:
 
 ```sh
 npm config set @lewismoten:registry https://npm.pkg.github.com --location=project
