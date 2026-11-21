@@ -1,7 +1,7 @@
 // Zips with no limits given get safe defaults; zips inside zips share one byte budget.
 import { describe, expect, it } from 'vitest';
-import { createZip, listZip, readZip, DEFAULT_ZIP_LIMITS } from '@lewismoten/gamemaker-sandbox-archives/zip';
-import { scanImport } from '@lewismoten/gamemaker-sandbox-archives/project/importScan';
+import { createZip, listZip, readZip, DEFAULT_ZIP_LIMITS } from '../src/project/zip';
+import { scanImport } from '../src/project/importScan';
 
 /** A zip whose directory claims `claim` bytes for its one file. */
 async function liar(claim: number): Promise<Uint8Array> {

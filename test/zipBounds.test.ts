@@ -1,6 +1,6 @@
 // Tiny malformed archives exercise metadata extents and exact decoded lengths.
 import { expect, it } from 'vitest';
-import { createZip, readZip, type ZipEntry } from '@lewismoten/gamemaker-sandbox-archives/zip';
+import { createZip, readZip, type ZipEntry } from '../src/project/zip';
 
 it('rejects stored ZIP data that extends into the central directory', async () => {
   const zip = await createZip([{ name: 'a', data: new Uint8Array([1]), store: true }]);

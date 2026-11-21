@@ -1,7 +1,7 @@
 // Regression cases from `npm run fuzz:files`: malformed files must fail with a clear Error, not a
 // RangeError or TypeError from deep inside, and not by allocating the size a header claims.
 import { describe, expect, it } from 'vitest';
-import { createZip, readZip } from '@lewismoten/gamemaker-sandbox-archives/project/zip';
+import { createZip, readZip } from '../src/project/zip';
 import { buildPreview } from '@lewismoten/gamemaker-sandbox-engine/formats/cmfPreview';
 import { readSong } from '@lewismoten/gamemaker-sandbox-engine/formats/cmfSong';
 import { parseFli } from '@lewismoten/gamemaker-sandbox-engine/formats/fli';

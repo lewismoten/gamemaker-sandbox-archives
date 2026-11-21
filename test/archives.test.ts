@@ -1,9 +1,9 @@
 // Portable game import across folders, nested archives, and both SFX offset conventions.
 import { describe, expect, it } from 'vitest';
 import { readFileSync } from 'node:fs';
-import { applyPlayerPatches } from '@lewismoten/gamemaker-sandbox-archives/player/applyPatches';
-import { unpackGame, unpackGames, createZip, type ScanFile } from '@lewismoten/gamemaker-sandbox-archives';
-import { encodePack } from '@lewismoten/gamemaker-sandbox-archives/pack';
+import { applyPlayerPatches } from '../src/player/applyPatches';
+import { unpackGame, unpackGames, createZip, type ScanFile } from '../src/index';
+import { encodePack } from '../src/project/gamePack';
 import { serializeGame, newGame } from '@lewismoten/gamemaker-sandbox-engine/formats/game';
 const gam = (name = 'Archive') => serializeGame(newGame(name));
 const files = (name = 'stripe'): [string, Uint8Array][] => [
@@ -78,7 +78,7 @@ describe('portable game archives', () => {
     expect((await unpackGame(gzip)).gam).toBe('stripe.gam');
   });
   it('recovers game filenames from a customized DOS player inside a ZIP', async () => {
-    const stock = new Uint8Array(readFileSync(new URL('../../cd/gm/xferplay.exe', import.meta.url)));
+    const stock = new Uint8Array(readFileSync(new URL('./fixtures/xferplay.exe', import.meta.url)));
     const exe = applyPlayerPatches(stock, { 'file.ext.gam': 'zzz' });
     const game = await unpackGame(
       await zip([
