@@ -1,16 +1,18 @@
 # @lewismoten/gamemaker-sandbox-archives
 
-Version **3.2.1**. Discover and unpack Game-Maker games in modern browsers or Node.js
+Version **3.2.3**. Discover and unpack Game-Maker games in modern browsers or Node.js
 **22.12+**, using ES modules with TypeScript declarations. The only runtime npm dependency
 is `@lewismoten/gamemaker-sandbox-engine` **^3.2.0**. Compressed inputs use
 `DecompressionStream` (including `deflate-raw` for ZIP and `gzip` for compressed packs);
 ZIP writing uses `CompressionStream` when available and otherwise stores bytes.
 
 ```sh
+npm config set @lewismoten:registry https://npm.pkg.github.com --location=project
+npm login --scope=@lewismoten --registry=https://npm.pkg.github.com --auth-type=legacy
 npm install @lewismoten/gamemaker-sandbox-archives
 ```
 
-Install through your configured npm registry; configure authentication according to that registry's instructions.
+Use your GitHub username and a classic personal access token with `read:packages` when npm prompts for credentials.
 
 ```ts
 import { unpackGame } from '@lewismoten/gamemaker-sandbox-archives';
@@ -118,19 +120,45 @@ console.log(entries.length, streamedEntries.length, reader.done);
 - `player/applyPatches`: `applyPlayerPatches`, `readPlayerPatches`, `STOCK_PLAYER_MD5` and preservation helpers.
 - `player/md5`: `md5Hex`.
 
-See the [public source modules](https://github.com/lewismoten/GameMaker-SandboxEdition/tree/master/web/packages/archives/src) for signatures.
+See the [public source modules](https://github.com/lewismoten/gamemaker-sandbox-archives/tree/main/src) for signatures.
 
 ## License and notices
 
-The source is MIT licensed. The published package carries [LICENSE](https://github.com/lewismoten/GameMaker-SandboxEdition/blob/master/web/packages/archives/LICENSE) and [NOTICE.md](https://github.com/lewismoten/GameMaker-SandboxEdition/blob/master/web/packages/archives/NOTICE.md) (credits for third-party code and formats); it includes no game assets.
+The source is MIT licensed. The published package carries [LICENSE](https://github.com/lewismoten/gamemaker-sandbox-archives/blob/main/LICENSE) and [NOTICE.md](https://github.com/lewismoten/gamemaker-sandbox-archives/blob/main/NOTICE.md) (credits for third-party code and formats); it includes no game assets.
 
-## Developing
+## Development and testing
 
-Source is in [web/packages/archives](https://github.com/lewismoten/GameMaker-SandboxEdition/tree/master/web/packages/archives/src).
-In the package folder, run `npm run build`, `npm run verify` or `npm pack`.
-Standalone builds use only package-owned source and declared dependencies. Repository
-development uses root `npm ci`; root `npm run verify:packages` supplies packed sibling
-dependencies for isolated builds and consumer checks. The tarball includes JavaScript,
-declarations, README, changelog, license and notices. See the
-[monorepo guide](https://github.com/lewismoten/GameMaker-SandboxEdition/blob/master/docs/monorepo.md)
-and [release guide](https://github.com/lewismoten/GameMaker-SandboxEdition/blob/master/docs/package-releases.md).
+From a standalone checkout, use Node.js 26 (the CI version) and run:
+
+```sh
+npm ci
+npm run build
+npm test
+npm run typecheck
+npm run verify
+```
+
+Vitest runs the tests in `test/`. To run one file, use `npm test -- test/zip.test.ts`.
+The build writes JavaScript and declarations to `dist/`. Verification packs the result,
+installs it in a temporary consumer, and checks its runtime API and NodeNext declarations.
+
+To try changes with the GameMaker app, run `npm link` in this archives checkout after
+building it. In the app's npm package directory, run
+`npm link @lewismoten/gamemaker-sandbox-archives`. To develop the engine alongside
+archives, first run `npm ci`, `npm run build`, and `npm link` in the local engine checkout.
+Then run `npm link @lewismoten/gamemaker-sandbox-engine` in this archives checkout.
+Rebuild each changed package before testing it in the app. Run `npm ci` in a consumer
+to restore its locked dependencies.
+
+## Releases
+
+1. Choose an unpublished version. Run `npm version <version> --no-git-tag-version` to
+   update the manifest and lockfile. Add a dated `## [x.y.z] - YYYY-MM-DD` section
+   to `CHANGELOG.md` with the release notes and update the README version.
+2. Run the development checks above and inspect `npm pack --dry-run`. Commit the
+   release changes and merge them into `main`.
+3. On the release commit, run `git tag vX.Y.Z` and `git push origin vX.Y.Z`, using
+   the exact package version. The workflow checks the tag against the manifest and
+   `main`, runs the build, tests and typecheck, and publishes to GitHub Packages.
+   The GitHub Release uses that version’s changelog section and includes a CycloneDX
+   SBOM of the runtime dependencies.
